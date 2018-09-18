@@ -8,7 +8,6 @@ pipeline {
             args '-u root -p 3000:3000 --net host'
         }
     }
-
     stages {
         stage('Build') {
             steps {
@@ -19,7 +18,13 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing...'
-                sh 'npm run dev'
+                sh 'curl -XGET http://localhost:3000/GetAllUpdatedProd'
+            }
+        }
+        stage('Success') {
+            steps {
+                echo 'Testing Success...'
+                sh 'echo success'
             }
         }
     }
